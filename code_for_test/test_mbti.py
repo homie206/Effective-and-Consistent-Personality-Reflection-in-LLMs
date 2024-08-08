@@ -7,7 +7,6 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 SAVE_PATH = '/home/hmsun/llama3/result/llama3_1_8b_mbti02.json'
 OUTPUT_PATH = '/home/hmsun/llama3/result/llama3_1_8b_mbti_output02.txt'
 
-HUGGING_FACE_HUB_TOKEN = "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"
 
 mbti_questions = json.load(
     open('mbti_questions_en.json', 'r', encoding='utf8')
