@@ -143,8 +143,8 @@ def extract_first_number(answer):
 def get_response(q, model_id):
 
             messages = [
-                {"role": "system", "content": ipip_prompt },
-                {"role": "user", "content": '''Imagine you are a human. Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
+                {"role": "system", "content":"Imagine you are a human." + ipip_prompt },
+                {"role": "user", "content": ''' Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
                                 1. Very Accurate
                                 2. Moderately Accurate
                                 3. Neither Accurate Nor Inaccurate
@@ -217,10 +217,10 @@ if __name__ == '__main__':
 
                         f.write(f"cycle: {run+1}\n")
                         print(f"cycle: {run+1}\n")
-                        f.write(f"prompting: {ipip_prompt}\n")
-                        print(f"prompting: {ipip_prompt}\n")
+                        f.write(f"prompting: Imagine you are a human. {ipip_prompt}\n")
+                        print(f"prompting: Imagine you are a human. {ipip_prompt}\n")
                         f.write(
-                            '''Imagine you are a human. Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
+                            '''Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
                                         1. Very Accurate
                                         2. Moderately Accurate
                                         3. Neither Accurate Nor Inaccurate
@@ -228,7 +228,7 @@ if __name__ == '__main__':
                                         5. Very Inaccurate
                                         Please only answer with the option number.''' + q)
                         print(
-                            '''Imagine you are a human. Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
+                            '''Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
                                         1. Very Accurate
                                         2. Moderately Accurate
                                         3. Neither Accurate Nor Inaccurate
