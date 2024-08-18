@@ -143,14 +143,14 @@ def extract_first_number(answer):
 def get_response(q, model_id):
 
             messages = [
-                {"role": "system", "content":"Imagine you are a human." + ipip_prompt },
+                {"role": "system", "content":"Imagine you are a human. " + ipip_prompt },
                 {"role": "user", "content": ''' Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
                                 1. Very Accurate
                                 2. Moderately Accurate
                                 3. Neither Accurate Nor Inaccurate
                                 4. Moderately Inaccurate
                                 5. Very Inaccurate
-                                Please only answer with the option number.''' + q }
+                                Please only answer with the option number. ''' + q }
             ]
 
             terminators = [
