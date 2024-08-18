@@ -353,7 +353,7 @@ def get_model_examing_result(model_id):
                 for question_num, question in mbti_questions.items():
                     messages = [
                         {"role": "system", "content": mbti_prompt},
-                        {"role": "user", "content":"You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7." + f"{question}"}
+                        {"role": "user", "content":"You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. " + f"{question}"}
                     ]
                     terminators = [
                         pipeline.tokenizer.eos_token_id,
@@ -446,7 +446,7 @@ def get_single_model_examing_result(model_id):
                 for question_num, question in mbti_questions.items():
                     messages = [
                         {"role": "system", "content": mbti_prompt},
-                        {"role": "user", "content":"You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7." + f"{question}"}
+                        {"role": "user", "content":"You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. " + f"{question}"}
                     ]
                     terminators = [
                         pipeline.tokenizer.eos_token_id,
