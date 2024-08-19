@@ -1,44 +1,111 @@
-import pandas as pd
 import os
+import pandas as pd
+import numpy as np
 
-# 定义文件夹路径
-folder_path = '/home/hmsun/llama3/ipip_50/result2'
+# 读取数据
+df = pd.read_csv('/home/hmsun/IPIP-FFM-data-8Nov2018/data-final.csv', sep='\t')
 
-# 遍历文件夹中的所有 CSV 文件
-for filename in os.listdir(folder_path):
+
+# 提取需要的列
+dims = ['EXT', 'EST', 'AGR', 'CSN', 'OPN']
+columns = [i + str(j) for j in range(1, 11) for i in dims]
+df = df[columns]
+
+
+def get_final_scores(columns, dim):
+    score = 0
+    if dim == 'EXT':
+        score += columns[0]
+        score -= columns[1]
+        score += columns[2]
+        score -= columns[3]
+        score += columns[4]
+        score -= columns[5]
+        score += columns[6]
+        score -= columns[7]
+        score += columns[8]
+        score -= columns[9]
+    if dim == 'EST':
+        score -= columns[0]
+        score += columns[1]
+        score -= columns[2]
+        score += columns[3]
+        score -= columns[4]
+        score -= columns[5]
+        score -= columns[6]
+        score -= columns[7]
+        score -= columns[8]
+        score -= columns[9]
+    if dim == 'AGR':
+        score -= columns[0]
+        score += columns[1]
+        score -= columns[2]
+        score += columns[3]
+        score -= columns[4]
+        score += columns[5]
+        score -= columns[6]
+        score += columns[7]
+        score += columns[8]
+        score += columns[9]
+    if dim == 'CSN':
+        score += columns[0]
+        score -= columns[1]
+        score += columns[2]
+        score -= columns[3]
+        score += columns[4]
+        score -= columns[5]
+        score += columns[6]
+        score -= columns[7]
+        score += columns[8]
+        score += columns[9]
+    if dim == 'OPN':
+        score += columns[0]
+        score -= columns[1]
+        score += columns[2]
+        score -= columns[3]
+        score += columns[4]
+        score -= columns[5]
+        score += columns[6]
+        score += columns[7]
+        score += columns[8]
+        score += columns[9]
+    return score
+
+
+# 计算每个维度的总分
+for dim in dims:
+    df[dim + '_all'] = df.apply(lambda r: get_final_scores([r[dim + str(j)] for j in range(1, 11)], dim), axis=1)
+
+
+def cal_test_position(test_score, df):
+    positions = {}
+    for cnt, dim in enumerate(dims):
+        df_tmp = df.sort_values(by=dim + '_all')
+        target_value = test_score[cnt]
+        if target_value in df_tmp[dim + '_all'].values:
+            index_position = df_tmp[dim + '_all'][df_tmp[dim + '_all'] == target_value].index[0]
+            percentage_position = (index_position + 1) / len(df_tmp[dim + '_all']) * 100
+            positions[dim + '_position'] = percentage_position
+        else:
+            positions[dim + '_position'] = None  # 如果目标值不在数据中
+    return positions
+
+
+# 遍历 result2 文件夹中的所有 CSV 文件
+result_dir = '/home/hmsun/llama3/ipip_50/result2'
+for filename in os.listdir(result_dir):
     if filename.endswith('.csv'):
-        file_path = os.path.join(folder_path, filename)
+        file_path = os.path.join(result_dir, filename)
+        df2 = pd.read_csv(file_path)
 
-        # 读取 CSV 文件
-        df = pd.read_csv(file_path)
+        # 遍历 df2 的每一行，并将位置添加到 df2
+        for index, row in df2.iterrows():
+            test_score = row[['EXT_Score', 'EST_Score', 'AGR_Score', 'CSN_Score', 'OPN_Score']].values.tolist()
+            positions = cal_test_position(test_score, df)
 
-        # 计算平均位置
-        mean_positions = df[['EXT_position', 'EST_position', 'AGR_position', 'CSN_position', 'OPN_position']].mean()
+            # 将位置添加到 df2
+            for key, value in positions.items():
+                df2.at[index, key] = value
 
-        # 添加高低列
-        for col in ['EXT', 'EST', 'AGR', 'CSN', 'OPN']:
-            df[f'{col}_high_or_low'] = df[f'{col}_position'].apply(lambda x: 'high' if x > 50 else 'low')
-
-        # 统计高低数量
-        high_low_counts = df[[f'{col}_high_or_low' for col in ['EXT', 'EST', 'AGR', 'CSN', 'OPN']]].apply(lambda x: x.value_counts(), axis=0).fillna(0)
-
-        # 计算平均位置的高低
-        mean_high_low = {col: 'high' if mean > 50 else 'low' for col, mean in mean_positions.items()}
-
-        # 输出结果
-        output_lines = ["平均位置：\n"]
-        output_lines.append(mean_positions.to_string())
-        output_lines.append("\n平均位置高低：\n")
-        output_lines.append(str(mean_high_low))
-        output_lines.append("\n高低统计：\n")
-        output_lines.append(high_low_counts.to_string())
-
-        # 生成同名 TXT 文件
-        txt_file_path = os.path.join(folder_path, filename.replace('.csv', '_results.txt'))
-        with open(txt_file_path, 'w') as f:
-            f.write('\n'.join(output_lines))
-
-        # 将高低列写回原 CSV 文件
-        df.to_csv(file_path, index=False)
-
-print("处理完成，所有结果已写入 TXT 文件和更新后的 CSV 文件。")
+        # 保存更新后的 df2
+        df2.to_csv(file_path, index=False)
