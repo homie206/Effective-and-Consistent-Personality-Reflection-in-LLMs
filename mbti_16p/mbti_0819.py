@@ -375,8 +375,8 @@ def get_model_examing_result(model_id):
                     print(f"cycle: {cycle}\n")
                     f.write(f"prompting: {mbti_prompt}\n")
                     print(f"prompting: {mbti_prompt}\n")
-                    f.write("You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. " + f"question: {question}\n")
-                    print("You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. " + f"question: {question}\n")
+                    f.write("You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. Here is the statement: " + f"question: {question}\n")
+                    print("You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. Here is the statement: " + f"question: {question}\n")
 
                     f.write(f"generated_text: {generated_text}\n")
                     print(f"generated_text: {generated_text}\n")
@@ -468,8 +468,8 @@ def get_single_model_examing_result(model_id):
                     print(f"cycle: {cycle}\n")
                     f.write(f"mbti_prompt: {mbti_prompt}\n")
                     print(f"mbti_prompt: {mbti_prompt}\n")
-                    f.write("You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. "+f"question: {question}\n")
-                    print("You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. "+f"question: {question}\n")
+                    f.write("You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. Here is the statement: "+f"question: {question}\n")
+                    print("You will be presented a statement to describe you. Please show the extent of how you agree the statement on a scale from 1 to 7, with 1 being agree and 7 being disagree. You can only reply a number from 1 to 7. Here is the statement: "+f"question: {question}\n")
                     f.write(f"generated_text: {generated_text}\n")
                     print(f"generated_text: {generated_text}\n")
 
