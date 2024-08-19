@@ -9,7 +9,6 @@ import transformers
 import re
 import pandas as pd
 
-
 def get_final_scores(columns, dim):
     score = 0
     if dim == 'EXT':
@@ -109,7 +108,7 @@ prompt_template = {
             "label":"O-High"
         },
         {
-            "prompt":"You are low on openness to experience tend to be more traditional and conservative. You may have a preference for familiar and predictable experiences, and may be less likely to seek out novel experiences.",
+            "prompt":"You are low on openness to experience. You tend to be more traditional and conservative. You may have a preference for familiar and predictable experiences, and may be less likely to seek out novel experiences.",
             "label":"O-Low"
         }
     ]
@@ -182,7 +181,7 @@ if __name__ == '__main__':
         device_map="auto",
     )
 
-    for ipip_item in prompt_template["ipip50_prompt"]:
+    for ipip_item in prompt_template["ipip50_prompt"][7:]:
         ipip_prompt = ipip_item["prompt"]
         ipip_label_content = ipip_item["label"]
 
@@ -248,10 +247,6 @@ if __name__ == '__main__':
 
                 # 保存结果到 CSV 文件
                 result_df.to_csv(result_file_name, index=False)
-
-
-
-
 
             df = pd.read_csv(result_file_name, sep=',')
 
