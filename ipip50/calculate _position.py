@@ -1,9 +1,10 @@
+import os
 import pandas as pd
 import numpy as np
 
 # 读取数据
 df = pd.read_csv('/home/hmsun/IPIP-FFM-data-8Nov2018/data-final.csv', sep='\t')
-df2 = pd.read_csv('/home/hmsun/llama3/ipip_50/result/test_score_with_final.csv')
+
 
 # 提取需要的列
 dims = ['EXT', 'EST', 'AGR', 'CSN', 'OPN']
@@ -78,32 +79,33 @@ for dim in dims:
 
 def cal_test_position(test_score, df):
     positions = {}
-    cnt = 0
-    for dim in dims:
+    for cnt, dim in enumerate(dims):
         df_tmp = df.sort_values(by=dim + '_all')
         target_value = test_score[cnt]
-        # 获取目标值的索引位置
         if target_value in df_tmp[dim + '_all'].values:
             index_position = df_tmp[dim + '_all'][df_tmp[dim + '_all'] == target_value].index[0]
             percentage_position = (index_position + 1) / len(df_tmp[dim + '_all']) * 100
             positions[dim + '_position'] = percentage_position
         else:
             positions[dim + '_position'] = None  # 如果目标值不在数据中
-        cnt += 1
     return positions
 
 
-# 遍历 df2 的每一行，并将位置添加到 df2
-for index, row in df2.iterrows():
-    test_score = row[['EXT_Score', 'EST_Score', 'AGR_Score', 'CSN_Score', 'OPN_Score']].values.tolist()
-    positions = cal_test_position(test_score, df)
+# 遍历 result2 文件夹中的所有 CSV 文件
+result_dir = '/home/hmsun/llama3/ipip_50/result2'
+for filename in os.listdir(result_dir):
+    if filename.endswith('.csv'):
+        file_path = os.path.join(result_dir, filename)
+        df2 = pd.read_csv(file_path)
 
-    # 将位置添加到 df2
-    for key, value in positions.items():
-        df2.at[index, key] = value
+        # 遍历 df2 的每一行，并将位置添加到 df2
+        for index, row in df2.iterrows():
+            test_score = row[['EXT_Score', 'EST_Score', 'AGR_Score', 'CSN_Score', 'OPN_Score']].values.tolist()
+            positions = cal_test_position(test_score, df)
 
-# 保存更新后的 df2
-df2.to_csv('/home/hmsun/llama3/ipip_50/result/updated_test_scores.csv', index=False)
+            # 将位置添加到 df2
+            for key, value in positions.items():
+                df2.at[index, key] = value
 
-# 可选：查看更新后的 df2
-print(df2.head())
+        # 保存更新后的 df2
+        df2.to_csv(file_path, index=False)
