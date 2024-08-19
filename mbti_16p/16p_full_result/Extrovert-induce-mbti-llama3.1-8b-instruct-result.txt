@@ -1,0 +1,5 @@
+ESFP-A: 60
+ESFP-T: 38
+Code: 1
+ESFJ-A: 1
+ESFJ-T: 1

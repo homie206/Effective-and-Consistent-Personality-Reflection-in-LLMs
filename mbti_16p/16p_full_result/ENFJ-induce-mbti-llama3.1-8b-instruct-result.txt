@@ -1,0 +1,4 @@
+ESFJ-A: 84
+ENFJ-A: 9
+ESFJ-T: 4
+ESFP-A: 3

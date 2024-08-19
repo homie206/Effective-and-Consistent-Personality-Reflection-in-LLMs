@@ -1,0 +1,3 @@
+ESTP-A: 90
+ENTP-A: 9
+ISTP-A: 1

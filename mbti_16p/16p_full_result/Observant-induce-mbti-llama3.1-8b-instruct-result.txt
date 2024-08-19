@@ -1,0 +1,4 @@
+ISTJ-A: 97
+ISTP-A: 2
+Code: 1
+ISTJ-T: 1

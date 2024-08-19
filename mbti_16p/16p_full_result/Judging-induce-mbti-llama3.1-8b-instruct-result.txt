@@ -1,0 +1,3 @@
+ISTJ-A: 99
+Code: 1
+ISFJ-A: 1

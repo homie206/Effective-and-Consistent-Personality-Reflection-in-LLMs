@@ -1,0 +1,4 @@
+ESFP-A: 72
+ENFP-A: 18
+ENFP-T: 5
+ESFP-T: 5

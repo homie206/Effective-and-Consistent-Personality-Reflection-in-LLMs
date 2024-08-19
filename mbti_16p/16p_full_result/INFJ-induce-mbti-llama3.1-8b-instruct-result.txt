@@ -1,0 +1,5 @@
+ISFJ-A: 71
+INFJ-A: 21
+ISFJ-T: 6
+ISFP-T: 1
+INFP-A: 1
