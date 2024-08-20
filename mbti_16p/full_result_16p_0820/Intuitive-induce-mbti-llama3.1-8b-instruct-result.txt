@@ -1,0 +1,5 @@
+INTP-A: 65
+INFP-A: 30
+ISTP-A: 2
+ISFP-A: 2
+INTP-T: 1
