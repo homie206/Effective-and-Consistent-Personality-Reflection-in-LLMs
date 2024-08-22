@@ -1,0 +1,5 @@
+ISFP-A: 84
+INFP-A: 7
+ISFJ-A: 6
+INFJ-A: 2
+INFP-T: 1

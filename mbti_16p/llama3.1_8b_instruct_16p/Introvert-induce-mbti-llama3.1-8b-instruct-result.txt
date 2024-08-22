@@ -1,0 +1,4 @@
+ISTP-T: 33
+ISTP-A: 32
+ISTJ-T: 18
+ISTJ-A: 17

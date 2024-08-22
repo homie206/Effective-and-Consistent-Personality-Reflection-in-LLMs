@@ -1,0 +1,2 @@
+ISFJ-A: 99
+ISFJ-T: 1

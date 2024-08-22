@@ -1,0 +1,4 @@
+INFP-A: 66
+INFP-T: 31
+ISFP-T: 2
+ISFP-A: 1
