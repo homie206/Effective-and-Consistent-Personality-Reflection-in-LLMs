@@ -14,55 +14,55 @@ def get_final_scores(columns, dim):
     score = 0
     if dim == 'EXT':
         score += columns[0]
-        score -= columns[1]
+        score += (6 - columns[1])
         score += columns[2]
-        score -= columns[3]
+        score += (6 - columns[3])
         score += columns[4]
-        score -= columns[5]
+        score += (6 - columns[5])
         score += columns[6]
-        score -= columns[7]
+        score += (6 - columns[7])
         score += columns[8]
-        score -= columns[9]
+        score += (6 - columns[9])
     if dim == 'EST':
-        score -= columns[0]
+        score += (6 - columns[0])
         score += columns[1]
-        score -= columns[2]
+        score += (6 - columns[2])
         score += columns[3]
-        score -= columns[4]
-        score -= columns[5]
-        score -= columns[6]
-        score -= columns[7]
-        score -= columns[8]
-        score -= columns[9]
+        score += (6 - columns[4])
+        score += (6 - columns[5])
+        score += (6 - columns[6])
+        score += (6 - columns[7])
+        score += (6 - columns[8])
+        score += (6 - columns[9])
     if dim == 'AGR':
-        score -= columns[0]
+        score += (6 - columns[0])
         score += columns[1]
-        score -= columns[2]
+        score += (6 - columns[2])
         score += columns[3]
-        score -= columns[4]
+        score += (6 - columns[4])
         score += columns[5]
-        score -= columns[6]
+        score += (6 - columns[6])
         score += columns[7]
         score += columns[8]
         score += columns[9]
     if dim == 'CSN':
         score += columns[0]
-        score -= columns[1]
+        score += (6 - columns[1])
         score += columns[2]
-        score -= columns[3]
+        score += (6 - columns[3])
         score += columns[4]
-        score -= columns[5]
+        score += (6 - columns[5])
         score += columns[6]
-        score -= columns[7]
+        score += (6 - columns[7])
         score += columns[8]
         score += columns[9]
     if dim == 'OPN':
         score += columns[0]
-        score -= columns[1]
+        score += (6 - columns[1])
         score += columns[2]
-        score -= columns[3]
+        score += (6 - columns[3])
         score += columns[4]
-        score -= columns[5]
+        score += (6 - columns[5])
         score += columns[6]
         score += columns[7]
         score += columns[8]
@@ -168,13 +168,13 @@ def get_response(q, model_id):
 
             messages = [
                 {"role": "system", "content":"Imagine you are a human. " + ipip_prompt },
-                {"role": "user", "content": ''' Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
-                                1. Very Accurate
-                                2. Moderately Accurate
+                {"role": "user", "content": '''Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
+                                1. Very Inaccurate
+                                2. Moderately Inaccurate 
                                 3. Neither Accurate Nor Inaccurate
-                                4. Moderately Inaccurate
-                                5. Very Inaccurate
-                                Please only answer with the option number. ''' + q }
+                                4. Moderately Accurate
+                                5. Very Accurate
+                                Please only answer with the option number. \nHere is the statement: ''' + q }
             ]
 
             terminators = [
@@ -212,8 +212,8 @@ if __name__ == '__main__':
         ipip_label_content = ast.literal_eval(ipip_item["label"])  # 转换为列表
         ipip_label_content_str = '-'.join(ipip_label_content)
 
-        output_file_name = f'/home/hmsun/llama3/ipip_50/result3/{ipip_label_content_str}-induce-mbti-llama3.1-8b-instruct-output.txt'
-        result_file_name = f'/home/hmsun/llama3/ipip_50/result3/{ipip_label_content_str}-induce-mbti-llama3.1-8b-instruct-result.csv'
+        output_file_name = f'/home/user/hmsun/result2/{ipip_label_content_str}-induce-mbti-llama3.1-8b-instruct-output.txt'
+        result_file_name = f'/home/user/hmsun/result2/{ipip_label_content_str}-induce-mbti-llama3.1-8b-instruct-result.csv'
 
         if not os.path.isfile(result_file_name):
             df = pd.DataFrame(columns=['EXT1','AGR1','CSN1','EST1','OPN1','EXT2','AGR2','CSN2','EST2','OPN2','EXT3','AGR3','CSN3','EST3','OPN3','EXT4','AGR4','CSN4','EST4','OPN4','EXT5','AGR5','CSN5','EST5','OPN5','EXT6','AGR6','CSN6','EST6','OPN6','EXT7','AGR7','CSN7','EST7','OPN7','EXT8','AGR8','CSN8','EST8','OPN8','EXT9','AGR9','CSN9','EST9','OPN9','EXT10','AGR10','CSN10','EST10','OPN10'])
@@ -247,20 +247,20 @@ if __name__ == '__main__':
                         print(f"prompting: Imagine you are a human. {ipip_prompt}\n")
                         f.write(
                             '''Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
-                                        1. Very Accurate
-                                        2. Moderately Accurate
-                                        3. Neither Accurate Nor Inaccurate
-                                        4. Moderately Inaccurate
-                                        5. Very Inaccurate
-                                        Please only answer with the option number.''' + q)
+                                1. Very Inaccurate
+                                2. Moderately Inaccurate 
+                                3. Neither Accurate Nor Inaccurate
+                                4. Moderately Accurate
+                                5. Very Accurate
+                                Please only answer with the option number. \nHere is the statement: ''' + q)
                         print(
                             '''Given a statement of you. Please choose from the following options to identify how accurately this statement describes you. 
-                                        1. Very Accurate
-                                        2. Moderately Accurate
-                                        3. Neither Accurate Nor Inaccurate
-                                        4. Moderately Inaccurate
-                                        5. Very Inaccurate
-                                        Please only answer with the option number.''' + q)
+                                1. Very Inaccurate
+                                2. Moderately Inaccurate 
+                                3. Neither Accurate Nor Inaccurate
+                                4. Moderately Accurate
+                                5. Very Accurate
+                                Please only answer with the option number. \nHere is the statement: ''' + q)
                         f.write(answer + '\n')
                         print(answer + '\n')
 
