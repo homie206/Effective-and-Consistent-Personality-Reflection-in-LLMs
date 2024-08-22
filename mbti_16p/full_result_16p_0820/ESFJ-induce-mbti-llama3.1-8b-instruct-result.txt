@@ -1,4 +1,0 @@
-ESFJ-A: 80
-ISFJ-A: 16
-ESFJ-T: 3
-ISFJ-T: 1

@@ -1,4 +1,0 @@
-ESFP-A: 91
-ESFJ-A: 4
-ESFP-T: 4
-ISFP-A: 1

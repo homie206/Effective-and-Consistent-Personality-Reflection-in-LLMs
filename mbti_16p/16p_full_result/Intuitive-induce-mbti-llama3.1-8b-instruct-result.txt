@@ -1,6 +1,0 @@
-ISFP-A: 73
-INFP-A: 16
-ESFP-A: 8
-ENFP-A: 2
-Code: 1
-ISFP-T: 1

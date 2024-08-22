@@ -1,5 +1,0 @@
-ISFP-A: 74
-ISFP-T: 16
-INFP-A: 5
-ESFP-A: 3
-ESFP-T: 2

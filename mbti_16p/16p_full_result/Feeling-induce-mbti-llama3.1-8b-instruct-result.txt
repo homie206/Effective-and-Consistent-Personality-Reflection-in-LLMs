@@ -1,6 +1,0 @@
-ESFP-A: 52
-ESFJ-A: 26
-ISFP-A: 14
-ISFJ-A: 7
-Code: 1
-ESFJ-T: 1

@@ -182,7 +182,7 @@ if __name__ == '__main__':
         device_map="auto",
     )
 
-    for ipip_item in prompt_template["ipip50_prompt"][7:]:
+    for ipip_item in prompt_template["ipip50_prompt"]:
         ipip_prompt = ipip_item["prompt"]
         ipip_label_content = ipip_item["label"]
 

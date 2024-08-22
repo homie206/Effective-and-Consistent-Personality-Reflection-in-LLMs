@@ -1,6 +1,0 @@
-ISFP-A: 59
-ISTP-A: 37
-ESTP-A: 2
-Code: 1
-ISTJ-A: 1
-ISFJ-A: 1
